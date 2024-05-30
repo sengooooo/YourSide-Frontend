@@ -37,8 +37,8 @@ const ResultText = styled.p`
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 2.375rem; /* 211.111% */
-  width: 60%
+  line-height: 1.75rem; /* 211.111% */
+  // width: 80%
 `
 
 const Partition = styled.div`
@@ -74,7 +74,7 @@ const RequirementButtonBox = styled.div`
 const RequirementButton = styled.button`
   border-radius: 6.25rem;
   background: var(--main-color-Primary-color, #204598);
-  width: 5vw;
+  width: 6vw;
   height: 4vh;
   border: none;
   display: flex;
@@ -90,32 +90,25 @@ const RequirementButton = styled.button`
   letter-spacing: -0.01875rem;
 `
 
-export default function ResultComponents() {
-  const [resultTitleText, setResultTitleText] = useState("Title");
-  const [resultText, setResultText] = useState(`상시 5인 미만 사업장에서 근무하시므로 추가적인 가산 수당이 없습니다.<br />
-  주 근로 시간이 40시간이므로 주휴수당이 발생합니다.
-  5인 미만 사업장에서 근무하시기에 연장근로수당은 발생하지 않습니다.
-  5인 미만 사업장에서 근무하시기에 휴일근로수당은 발생하지 않습니다.
-  따라서, 코카콜라 님의 월급은 800,000원 입니다.`);
-  const [RequirementButtonText, setRequirementButtonText] = useState(["requirement", "requirement", "requirement"]);
+export default function ResultComponents({title, content, week, holiday, extra, night, overtime}) {
 
   return (
     <ResultContainer>
       <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <ResultHeaderText>{resultTitleText} 근로 결과지</ResultHeaderText>
+        <ResultHeaderText>{title}</ResultHeaderText>
         <DetailText>상세보기 &gt;</DetailText>
       </div>
-      <div style={{height: "max-content", display: "flex", gap: "7rem"}}>
-      <ResultText dangerouslySetInnerHTML={{ __html: resultText }} />
+      <div style={{height: "max-content", display: "flex", gap: "6rem"}}>
+      <ResultText dangerouslySetInnerHTML={{ __html: content }} />
         <Partition />
         <RequirementBox>
           <RequirementText>발생 요건들</RequirementText>
           <RequirementButtonBox>
-            {RequirementButtonText.map((text, index) => {
-              return (
-                <RequirementButton key={index}>{text}</RequirementButton>
-              )
-            })}
+            {week && <RequirementButton>주휴수당</RequirementButton>}
+            {extra && <RequirementButton>가산수당</RequirementButton>}
+            {holiday && <RequirementButton>휴일근로수당</RequirementButton>}
+            {night && <RequirementButton>야간근로수당</RequirementButton>}
+            {overtime && <RequirementButton>연장근로수당</RequirementButton>}
           </RequirementButtonBox>
         </RequirementBox>
       </div>

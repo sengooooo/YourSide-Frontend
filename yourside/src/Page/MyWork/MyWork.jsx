@@ -1,5 +1,6 @@
-import { styled } from 'styled-components';
-import { useState } from 'react';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { defaultInstance } from '../../\bapis/utils/instance';
 import axios from 'axios';
 import Header from '../Header/components/Header';
 import bannerImg from "../../images/BannerImg.png";
@@ -78,6 +79,25 @@ export default function MyWork() {
   const [workSheet, setWorkSheet] = useState([]);
   const [more, setMore] = useState(false);
 
+  useEffect(() => {
+    const getResult = async () => {
+      try {
+        const response = await defaultInstance.get(`api/worksheet/list`);
+        console.log(response);
+        setWorkSheet(response.data.data);
+      } catch (error) {
+        console.error("error", error);
+      }
+    }
+
+    getResult();
+
+  }, []);
+
+  const handleShowMore = () => {
+    setMore(!more);
+  }
+
   return (
     <>
       <Header />
@@ -88,12 +108,15 @@ export default function MyWork() {
           <BannerButton>바로가기</BannerButton>
         </BannerContainer>
         <HeaderText>다른 결과지들은 어떨까?</HeaderText>
-        {/* {!more && {
-
-        }} */}
-        <ResultComponents />
+          {workSheet.slice(0, more ? workSheet.length : 3 ).map((data, index) => {
+            return (
+              <ResultComponents title={data.title} content={data.content} extra={data.extra_pay} holiday={data.holiday_pay} night={data.night_pay} overtime={data.overtime_pay} week={data.week_pay} key={index} />
+            )
+          })
+        }
         <div style={{display: "flex", justifyContent: "flex-end"}}>
-          <MoreButton>더 보기</MoreButton>
+          {!more && <MoreButton onClick={handleShowMore}>더 보기</MoreButton>}
+          {more && <MoreButton onClick={handleShowMore}>가리기</MoreButton>}
         </div>
       </Wrapper>  
       <Footer />
