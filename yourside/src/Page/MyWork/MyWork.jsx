@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from '../Header/components/Header';
 import bannerImg from "../../images/BannerImg.png";
 import ResultComponents from './components/ResultComponents';
+import Footer from '../Footer/components/Footer';
 
 const Wrapper = styled.div`
   background: #EFF6FE;
@@ -72,6 +73,7 @@ export default function MyWork() {
         }} */}
         <ResultComponents />
       </Wrapper>  
+      <Footer />
     </>
   )
 }
