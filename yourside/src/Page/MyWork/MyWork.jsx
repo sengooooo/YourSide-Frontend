@@ -57,6 +57,8 @@ const BannerButton = styled.button`
 `
 
 const MoreButton = styled.button`
+width:4.5rem;
+height:3.5rem;
   background: var(--main-color-Sub-color, #1BBFC1);
   display: flex;
   justify-content: center;
@@ -73,6 +75,7 @@ const MoreButton = styled.button`
   border: none;
   cursor: pointer;
   float: right;
+  margin-bottom: 7.5rem
 `
 
 export default function MyWork() {
