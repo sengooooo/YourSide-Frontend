@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import { useState } from 'react';
+import axios from 'axios';
 import Header from '../Header/components/Header';
 import bannerImg from "../../images/BannerImg.png";
 import ResultComponents from './components/ResultComponents';
@@ -54,6 +55,25 @@ const BannerButton = styled.button`
   border: none;
 `
 
+const MoreButton = styled.button`
+  background: var(--main-color-Sub-color, #1BBFC1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: right;
+  color: #FFF;
+  /* Button/BUT1_Sb */
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.025rem;
+  border: none;
+  cursor: pointer;
+  float: right;
+`
+
 export default function MyWork() {
   const [workSheet, setWorkSheet] = useState([]);
   const [more, setMore] = useState(false);
@@ -68,10 +88,13 @@ export default function MyWork() {
           <BannerButton>바로가기</BannerButton>
         </BannerContainer>
         <HeaderText>다른 결과지들은 어떨까?</HeaderText>
-        {/* {more == false && {
+        {/* {!more && {
 
         }} */}
         <ResultComponents />
+        <div style={{display: "flex", justifyContent: "flex-end"}}>
+          <MoreButton>더 보기</MoreButton>
+        </div>
       </Wrapper>  
       <Footer />
     </>

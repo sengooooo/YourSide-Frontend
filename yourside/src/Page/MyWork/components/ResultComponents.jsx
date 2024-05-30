@@ -6,6 +6,7 @@ const ResultContainer = styled.div`
   width: 80vw;
   background: #FFF;
   padding: 3vw;
+  margin-bottom: 2.5rem;
 `
 
 const ResultHeaderText = styled.p`
