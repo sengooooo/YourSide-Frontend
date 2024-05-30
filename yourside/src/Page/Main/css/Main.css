@@ -1,7 +1,15 @@
 .main-content {
-    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top:3.75rem;
+  }
+
+  .banner-img{
+    transition: opacity 0.5s ease;
+  }
+
+  .banner-img.transitioning {
+    opacity: 0.5; 
   }
   
   .banner {
@@ -42,23 +50,17 @@
 
   }
   
-  .banner-dots {
-    left: 600px;
-    position: absolute;
-    bottom: 10px;
-    transform: translateX(-50%);
-    size: 100cap;
-  }
-  
   .section-title {
     text-align: margin;
     color: var(--system-color-system-black-900, #111);
     font-family: Pretendard;
-    font-size: 72px;
+    font-size: 4.5rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 90px; /* 125% */
+    line-height: 90px;
     letter-spacing: -1.8px;
+    margin-top : 7.5rem;
+    margin-bottom: 2.5rem;
   }
   
   .card-grid {
@@ -133,6 +135,4 @@
   .card-link:hover {
     background-color: #0056b3;
   }
-  
-
   

@@ -35,10 +35,9 @@ const ContractComparison = () => {
     "전체"
   ];
 
-  // 선택된 항목에 따라 해당 이미지 경로 가져오기
+
   const getImagePath = () => {
     if(selectedItem !== null && index[selectedItem]) {
-      // 선택된 항목이 유효하면 해당 이미지 경로 반환
       const selectedImage = index[selectedItem];
       switch(selectedImage) {
         case 'one':
