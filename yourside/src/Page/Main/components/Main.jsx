@@ -40,7 +40,7 @@ const Main = () => {
               <div className="card-title">내 근로 정리</div>
             </div>
             <p>정리된 정보를 바탕으로 내 근로상황을 파악해보세요.</p>
-            <Link to="/workArrangement" className="link">
+            <Link to="/MyWork" className="link">
               <div className="card-link">바로가기</div>
             </Link>
           </div>

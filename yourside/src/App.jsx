@@ -14,6 +14,7 @@ import FindPW from './Page/FindPW/components/FindPW';
 import DevTerminal from './DevTerminal';
 
 import NotationExample from './Page/Notation/components/NotationExample';
+import MyWork from './Page/MyWork/MyWork';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/ContractReview" element={<ContractReview />} />
         <Route path="/QuestionAndAnswer" element={<QuestionAndAnswer />} />
-        <Route path="/WorkArrangement" element={<WorkArrangement />} />
+        <Route path="/MyWork" element={<MyWork/>} />
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/MyPage" element={<MyPage />} />
