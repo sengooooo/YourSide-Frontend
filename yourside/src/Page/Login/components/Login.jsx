@@ -1,9 +1,48 @@
 import React from 'react';
+import { useState } from 'react';
+import { signin } from '../../../apis/api/user'
+import axios from "axios";
 import '../css/login.css';
 import SymbolLogo from '../img/symbol-logo.png';
 import SymbolLogoText from '../img/symbol-logo-text.png';
 
 const MyPage = () => {
+  const [loginVal, setLoginVal] = useState({
+    username: null,
+    password: null,
+  });
+
+  const handleChangeId = (e) => {
+    setLoginVal({ ...loginVal, username: e.target.value });
+  };
+
+  const handleChangePw = (e) => {
+    setLoginVal({ ...loginVal, password: e.target.value });
+  };
+  const [alertMessage, setAlertMessage] = useState('');
+  
+  const handleSignIn = async () => {
+    console.log(loginVal.username)
+    try {
+        const res = await signin({
+            username: loginVal.username,
+            password: loginVal.password,
+        });
+        console.log(res)
+        if(axios.isAxiosError(res)){
+          if(res.response.data.status === 404) setAlertMessage("아이디가 존재하지 않습니다.")
+          else if(res.response.data.status === 400) setAlertMessage("비밀번호가 일치하지 않습니다.")
+        }
+        else{
+          if(res.data.status === 200){
+            localStorage.setItem("user_id", res.data.data.user_id)
+            setAlertMessage()
+          }
+        }
+    } catch (e) {
+      // console.log(e);
+    }
+  };
   return (
     <div className="Login">
       <div className="container">
@@ -15,12 +54,13 @@ const MyPage = () => {
 
         <div className="id">
           <p>아이디</p>
-          <input placeholder="아이디를 입력해 주세요" />
+          <input value={loginVal.username} onChange={handleChangeId} placeholder="아이디를 입력해 주세요" />
         </div>
 
         <div className="pw">
           <p>비밀번호</p>
-          <input placeholder="비밀번호를 입력해 주세요" />
+          <input type="password" value={loginVal.password} onChange={handleChangePw} placeholder="비밀번호를 입력해 주세요" />
+          {alertMessage && (
           <p
             style={{
               display: 'flex',
@@ -30,11 +70,12 @@ const MyPage = () => {
               color: '#DC0000',
             }}
           >
-            아이디 혹은 비밀번호가 옳지 않습니다.
+            {alertMessage}
           </p>
+        )}
         </div>
 
-        <button id="login-button">로그인</button>
+        <button id="login-button" onClick={handleSignIn}>로그인</button>
         <div className="sign-up">
           <p>아이디/비밀번호 찾기</p>
           <p style={{ color: 'black' }}>
