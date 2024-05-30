@@ -25,7 +25,7 @@ const Header = () => {
           <Link to="/ContractReview" className="link">
             <div className="button">내 계약서 검토</div>
           </Link>
-          <Link to="/WorkArrangement" className="link">
+          <Link to="/MyWork" className="link">
             <div className="button">내 근로 정리</div>
           </Link>
           <Link to="/QuestionAndAnswer" className="link">
