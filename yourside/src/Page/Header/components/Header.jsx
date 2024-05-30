@@ -5,9 +5,16 @@ import login from '../img/login.svg';
 
 const Header = () => {
 
+  const HeaderContainer={
+    width:"100%",
+    backgroundColor:"white",
+    display:"flex",
+    justifyContent:"center"
+  }
+
   const HeaderStyle = {
     display: "flex",
-    width: "100%",
+    width: "80vw",
     height: "6.26rem",
     backgroundColor: "white",
     flexDirection: "row",
@@ -42,6 +49,7 @@ const Header = () => {
   }
 
   return (
+    <div style={HeaderContainer}>
     <div className="header" style={HeaderStyle}>
       <div className="header-menu" style={MenuStyle}>
         <div className="logo" style={LogoStyle}>
@@ -75,6 +83,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };
