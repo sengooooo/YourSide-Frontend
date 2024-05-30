@@ -1,24 +1,101 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import './ContractComparison.css';
+import one from '../../../images/first.png';
+import two from '../../../images/second.png';
+import three from '../../../images/third.png'; 
+import four from '../../../images/fourth.png'; 
+import five from '../../../images/fifth.png';  
+import six from '../../../images/sixth.png'; 
+import seven from '../../../images/seventh.png'; 
+import eight from '../../../images/eight.png'; 
+import nine from '../../../images/nine.png'; 
+import ten from '../../../images/ten.png'; 
+import Header from '../../Header/components/Header';
+import Footer from '../../Footer/components/Footer';
 
-const ContractReview = () => {
+const ContractComparison = () => {
+  const [selectedItem, setSelectedItem] = useState(0);
+  
+  const handleItemClick = (itemIndex) => {
+    setSelectedItem(itemIndex);
+  };
+
+  const index = ["one","two","three","four","five","six","seven","eight","nine","ten"];
+
+  const title = [
+    "근로계약기간",
+    "근무장소",
+    "업무의 내용",
+    "소정근로시간",
+    "근무일 및 휴일",
+    "임 금",
+    "연차유급휴가",
+    "사회보험 적응여부",
+    "근로계약서 교부",
+    "전체"
+  ];
+
+  // 선택된 항목에 따라 해당 이미지 경로 가져오기
+  const getImagePath = () => {
+    if(selectedItem !== null && index[selectedItem]) {
+      // 선택된 항목이 유효하면 해당 이미지 경로 반환
+      const selectedImage = index[selectedItem];
+      switch(selectedImage) {
+        case 'one':
+          return one;
+        case 'two':
+          return two;
+        case 'three':
+          return three;
+        case 'four':
+          return four;
+        case 'five':
+          return five;
+        case 'six':
+          return six;
+        case 'seven':
+          return seven;
+        case 'eight':
+          return eight;
+        case 'nine':
+          return nine;
+        case 'ten':
+          return ten;
+        default:
+          return one;
+      }
+    } else {
+      return one;
+    }
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: '40vh',
-        border: '1px solid black',
-      }}
-    >
-      <h1>네편 프로젝트 with 멋사</h1>
-      <h3>현재 페이지 파일 이름은 ContractReview.jsx 입니다.</h3>
-      <Link to="/DevTerminal">
-        <button>개발 터미널로 이동</button>
-      </Link>
+    <div>
+      <Header />
+      <div className="container">
+        <header className="headerCon">
+          <h1><span>나의 근로계약서</span>를 가지고 </h1>
+          <h1>화면에 <span>표준 근로계약서와</span> 비교해보세요</h1>
+        </header>
+        <main className="main">
+          <nav className="navCon">
+            <h3>항목</h3>
+            <ul>
+              {index.map((item, itemIndex) => (
+                <li key={item} style={{ color: selectedItem === itemIndex ? '#204598' : 'black' }} onClick={() => handleItemClick(itemIndex)}>
+                  {`${itemIndex + 1}. ${title[itemIndex]}`}
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <section className="contract">
+            <img src={getImagePath()} alt="표준 근로계약서" className="contract-image" />
+          </section>
+        </main>
+      </div>
+      <Footer/>
     </div>
   );
 };
 
-export default ContractReview;
+export default ContractComparison;
