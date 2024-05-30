@@ -1,22 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../img/logo.svg';
 import login from '../img/login.svg';
 
+
 const Header = () => {
+
+  const location = useLocation();
 
   const HeaderContainer={
     width:"100%",
-    backgroundColor:"white",
     display:"flex",
-    justifyContent:"center"
+    justifyContent:"center",
+    borderBottom: "2px solid var(--system-color-system-black-100, #E1E1E1)"
   }
 
   const HeaderStyle = {
     display: "flex",
     width: "80vw",
-    height: "6.26rem",
-    backgroundColor: "white",
+    height: "6.25rem",
     flexDirection: "row",
     alignItems: "center", 
     justifyContent: "center",
@@ -36,9 +38,54 @@ const Header = () => {
     marginRight:"11.38rem"
   }
 
-  const BtnStyle = {
-    display: "flex",
-    alignItems: "center"
+  const HomeBtnStyle = {
+    width : "5rem",
+    height:"6.25rem",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    color: location.pathname === "/" ? "#204598" : "black",
+    borderBottom: location.pathname === "/" ? "3px solid #204598" : "3px solid transparent"
+  }
+
+  const NotificationBtnStyle={
+    width:"6.875rem",
+    height:"6.25rem",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    color: location.pathname === "/Notation" ? "#204598" : "black", 
+    borderBottom: location.pathname === "/Notation" ? "3px solid #204598" : "3px solid transparent"
+  }
+
+  const MyConBtnStyle={
+    width:"9.375rem",
+    height:"6.25rem",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    color: location.pathname === "/ContractReview" ? "#204598" : "black",
+    borderBottom: location.pathname === "/ContractReview" ? "3px solid #204598" : "3px solid transparent"
+  }
+
+  const MyWorkBtnStyle={
+    width:"8.125rem",
+    height:"6.25rem",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    color: location.pathname === "/MyWork" ? "#204598" : "black",
+    borderBottom: location.pathname === "/MyWork" ? "3px solid #204598" : "3px solid transparent"
+  }
+
+  const AnsBtnStyle={
+    width:"8.125rem",
+    height:"6.25rem",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    color: location.pathname === "/QuestionAndAnswer" ? "#204598" : "black",
+    borderBottom: location.pathname === "/QuestionAndAnswer" ? "3px solid #204598" : "3px solid transparent"
   }
 
   const LogoStyle = {
@@ -47,6 +94,8 @@ const Header = () => {
     display: "flex",
     alignItems: "center"
   }
+
+
 
   return (
     <div style={HeaderContainer}>
@@ -61,19 +110,19 @@ const Header = () => {
 
         <div className="nav" style={NavStyle}>
           <Link to="/" className="link">
-            <div className="button" style={BtnStyle}>홈</div>
+            <div className="button" style={HomeBtnStyle}>홈</div>
           </Link>
           <Link to="/Notation" className="link">
-            <div className="button" style={BtnStyle}>공지사항</div>
+            <div className="button" style={NotificationBtnStyle}>공지사항</div>
           </Link>
           <Link to="/ContractReview" className="link">
-            <div className="button" style={BtnStyle}>내 계약서 검토</div>
+            <div className="button" style={MyConBtnStyle} >내 계약서 검토</div>
           </Link>
           <Link to="/MyWork" className="link">
-            <div className="button" style={BtnStyle}>내 근로 정리</div>
+            <div className="button" style={MyWorkBtnStyle}>내 근로 정리</div>
           </Link>
           <Link to="/QuestionAndAnswer" className="link">
-            <div className="button" style={BtnStyle}>네편 현답</div>
+            <div className="button" style={AnsBtnStyle}>네편 현답</div>
           </Link>
         </div>
 
