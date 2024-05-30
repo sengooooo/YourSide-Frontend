@@ -49,15 +49,24 @@ body,h3 {
 .content {
   margin-top: 24px;
   width: 1180px;
+  color: var(--system-color-system-black-900, #111);
+font-family: Pretendard;
+font-size: 1.125rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.875rem; /* 166.667% */
+letter-spacing: -0.02813rem;
 }
 
 .button-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px; 
-  margin-bottom: 120px;
+width: 23.75rem;
+padding: 1rem;
+justify-content: center;
+align-items: center;
+gap: 0.625rem;
+margin-top:6.23rem;
+  background: var(--main-color-Sub-color, #1BBFC1);
 }
 
 /* button{
