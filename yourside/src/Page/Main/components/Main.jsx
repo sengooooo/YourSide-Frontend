@@ -184,7 +184,7 @@ const Main = () => {
             <div style={CardNumber}>3</div>
             <div style={CardTitle} className='title'>네편 현답</div>
             <p style={CardSubTitle} className='subtitle'>도와줘요 네편!<br/>결과지를 토대로 나의 상황을 간단히 보여주고 궁금점에 대한 답을 알아가요!</p>
-            <Link to="/QuestionAndAnswer" className="link">
+            <Link to="/YoursideAnswer" className="link">
               <div style={ButtonStyle}>바로가기<img src={blackright}/></div>
             </Link>
           </div>

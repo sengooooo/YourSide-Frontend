@@ -5,8 +5,11 @@ import axios from "axios";
 import '../css/login.css';
 import SymbolLogo from '../img/symbol-logo.png';
 import SymbolLogoText from '../img/symbol-logo-text.png';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
   const [loginVal, setLoginVal] = useState({
     username: null,
     password: null,
@@ -42,6 +45,7 @@ const MyPage = () => {
     } catch (e) {
       // console.log(e);
     }
+    navigate("/");
   };
   return (
     <div className="Login">
@@ -78,7 +82,7 @@ const MyPage = () => {
         <button id="login-button" onClick={handleSignIn}>로그인</button>
         <div className="sign-up">
           <p>아이디/비밀번호 찾기</p>
-          <p style={{ color: 'black' }}>
+          <p style={{ color: 'black' }} onClick={() => navigate("/SignUp")}>
             <strong>회원가입</strong>
           </p>
         </div>

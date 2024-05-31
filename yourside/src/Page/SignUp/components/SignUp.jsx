@@ -1,8 +1,11 @@
 import React from 'react';
 import SymbolRow from '../img/symbol-logo-row.png';
 import '../css/signup.css';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="Sign-Up">
       <div className="container">
@@ -35,7 +38,7 @@ const SignUp = () => {
           <input placeholder="아이디를 입력해 주세요" />
         </div>
 
-        <button id="Sign-Up-button">로그인</button>
+        <button id="Sign-Up-button" onClick={() => navigate("/Login")}>회원가입</button>
         <div className="sign-up">
           <p>이미 네편이 회원이신가요?</p>
           <p style={{ color: 'black' }}>
