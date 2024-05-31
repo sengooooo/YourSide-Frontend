@@ -15,6 +15,7 @@ import DevTerminal from './DevTerminal';
 
 import NotationExample from './Page/Notation/components/NotationExample';
 import MyWork from './Page/MyWork/MyWork';
+import YourSideAnswer from './Page/QuestionAndAnswer/YoursideAnswer';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/ContractReview" element={<ContractReview />} />
-        <Route path="/QuestionAndAnswer" element={<QuestionAndAnswer />} />
+        <Route path="/YoursideAnswer" element={<YourSideAnswer />} />
         <Route path="/Notation1" element={<NotationExample/>}/>
         <Route path="/MyWork" element={<MyWork/>} />
         <Route path="/Login" element={<Login />} />

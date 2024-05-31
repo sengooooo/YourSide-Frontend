@@ -121,7 +121,7 @@ const Header = () => {
           <Link to="/MyWork" className="link">
             <div className="button" style={MyWorkBtnStyle}>내 근로 정리</div>
           </Link>
-          <Link to="/QuestionAndAnswer" className="link">
+          <Link to="/YoursideAnswer" className="link">
             <div className="button" style={AnsBtnStyle}>네편 현답</div>
           </Link>
         </div>

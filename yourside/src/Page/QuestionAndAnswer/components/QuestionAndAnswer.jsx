@@ -1,66 +1,190 @@
-import React from 'react';
-import '../css/QuestionAndAnswer.css';
-import Header from '../../Header/components/Header';
-import Footer from '../../Footer/components/Footer';
+import { useState, useEffect } from "react";
+import styled, {css} from "styled-components";
+import { defaultInstance } from "../../../\bapis/utils/instance";
+import PopularPost from "./PopularPost";
+import PostComponent from "./PostComponent";
 
-const App = () => {
-  const popularPosts = [
-    {
-      id: 1,
-      question: '해당 사업에도 주휴수당이 발생하는지 궁금합니다',
-      answer: '설명 텍스트',
-    },
-    {
-      id: 2,
-      question: '금융업 임대 대리에도 휴일수당이 발생하나요?',
-      answer: '설명 텍스트',
-    },
-    {
-      id: 3,
-      question: '회사에 문제가 생겼을까요? (배경관리)',
-      answer: '설명 텍스트',
-    },
-  ];
+const Wrapper = styled.div`
+  background: #EFF6FE;
+  width: 80vw;
+  margin: 0 auto;
+`
 
-  const posts = [
-    {
-      id: 1,
-      question: '계약서 쓴 날짜 보다 미리 와서 2시간 있다갔어요.',
-      date: '2024.04.11',
-      answer: '설명 텍스트',
-    },
-  ];
+const CategoryButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+`
+
+const CategoryButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+  color: var(--system-color-system-black-700, #505050);
+  border: none;
+  width: 15vw;
+  height: 5vh;
+  cursor: pointer;
+
+  ${({selected}) => 
+    selected && 
+    css `background: var(--main-color-Primary-color, #204598); color: #FFF; `};
+`
+
+const HeaderText = styled.p`
+  color: var(--system-color-system-black-900, #111);
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 4.25rem; /* 141.667% */
+  letter-spacing: -0.075rem;  
+  margin-top: 5rem;
+`
+
+const PopularContanier = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+`
+
+const SubText = styled.p`
+  color: var(--system-color-system-black-900, #111);
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 3.125rem; /* 125% */
+  letter-spacing: -0.0625rem;
+`
+
+const PostWriteButton = styled.button`
+  background: var(--main-color-Sub-color, #1BBFC1);
+  color: #FFF;
+  // text-align: center;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 150% */
+  letter-spacing: -0.025rem;
+  border: none;
+  cursor: pointer;
+`
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin-bottom: 10rem;
+`
+
+export default function QuestionAndAnswer() {
+  const [answer, setAnswer] = useState(true);
+  const [info, setInfo] = useState(false);
+  const [answerPopular, setAnswerPopular] = useState([]);
+  const [postPopular, setPostPopular] = useState([]);
+
+  const handleAnswer = () => {
+    setAnswer(true);
+    setInfo(false);
+  }
+  
+  const handleInfo = () => {
+    setAnswer(false);
+    setInfo(true);
+  }
+
+  useEffect(() => {
+    if (answer) {
+      const getPostData = async () => {
+        try {
+          const [responsePopular, responsePost] = await Promise.all([
+            defaultInstance.get(`api/posting/list/popular/0`),
+            defaultInstance.get(`api/posting/list/0`)
+          ]);
+          setAnswerPopular(responsePopular.data.data);
+          setPostPopular(responsePost.data.data);
+        } catch (error) {
+          console.error("데이터 받아들이지 못함", error);
+        }
+      };
+      getPostData();
+    }
+
+    if (info) {
+      const getPostData = async () => {
+        try {
+          const [responsePopular, responsePost] = await Promise.all([
+            defaultInstance.get(`api/posting/list/popular/1`),
+            defaultInstance.get(`api/posting/list/1`)
+          ]);
+          setAnswerPopular(responsePopular.data.data);
+          setPostPopular(responsePost.data.data);
+        } catch (error) {
+          console.error("데이터 받아들이지 못함", error);
+        }
+      };
+      getPostData();
+    }
+  }, [answer]);
 
   return (
-    <div className="app-container">
-      <Header />
-      <div className="nav-buttons">
-        <button className="nav-button active">네편 답변</button>
-        <button className="nav-button">네편 정보</button>
-      </div>
-      <section className="popular-posts">
-        <h2>인기게시글</h2>
-        <div className="post-cards">
-          {popularPosts.map(post => (
-            <div className="post-card" key={post.id}>
-              <h3>Q. {post.question}</h3>
-              <p>{post.answer}</p>
-            </div>
-          ))}
+    <>
+      <Wrapper>
+        <CategoryButtonBox>
+          <CategoryButton selected={answer} onClick={handleAnswer} >네편 답변</CategoryButton>
+          <CategoryButton selected={info} onClick={handleInfo} >네편 정보</CategoryButton>
+        </CategoryButtonBox>
+        <HeaderText>인기게시글</HeaderText>
+        {answer && 
+          <PopularContanier>
+            {answerPopular.map((content, index) => {
+              return (
+                <PopularPost key={index} title={content.title} text={content.content}/>
+              )
+            })}
+          </PopularContanier>
+        }
+        {info && 
+          <PopularContanier>
+            {answerPopular.map((content, index) => {
+              return (
+                <PopularPost key={index} title={content.title} text={content.content}/>
+              )
+            })}
+          </PopularContanier>
+        }
+        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "5rem", marginBottom: "3rem"}}>
+          <SubText>게시글</SubText>
+          <PostWriteButton>게시글 작성</PostWriteButton>
         </div>
-      </section>
-      <section className="posts">
-        <h2>게시글</h2>
-        <div className="post-card" key={posts[0].id}>
-          <h3>Q. {posts[0].question}</h3>
-          <p>{posts[0].date}</p>
-          <p>{posts[0].answer}</p>
-          <button className="view-more-button">자세히 보기</button>
-        </div>
-      </section>
-      <Footer />
-    </div>
-  );
-};
-
-export default App;
+        {answer && 
+          <PostContainer>
+            {postPopular.map((content, index) => {
+              return (
+                <PostComponent key={index} title={content.title} text={content.content} />
+              )
+            })}
+          </PostContainer>
+        }
+        {info && 
+          <PostContainer>
+            {postPopular.map((content, index) => {
+              return (
+                <PostComponent key={index} title={content.title} text={content.content} />
+              )
+            })}
+          </PostContainer>
+        }
+      </Wrapper>
+    </>
+  )
+}

@@ -36,7 +36,7 @@ const BannerContainer = styled.div`
 ` 
 
 const BannerImgBox = styled.img`
-  width: 70%;
+  width: 80%;
 `
 const BannerButton = styled.button`
   background: var(--main-color-Primary-color, #204598);
@@ -74,7 +74,7 @@ height:3.5rem;
   letter-spacing: -0.025rem;
   border: none;
   cursor: pointer;
-  float: right;
+  // float: right;
   margin-bottom: 7.5rem
 `
 
@@ -117,7 +117,7 @@ export default function MyWork() {
             )
           })
         }
-        <div style={{display: "flex", justifyContent: "flex-end"}}>
+        <div style={{display: "flex", justifyContent: "flex-end", width: "100%"}}>
           {!more && <MoreButton onClick={handleShowMore}>더 보기</MoreButton>}
           {more && <MoreButton onClick={handleShowMore}>가리기</MoreButton>}
         </div>
